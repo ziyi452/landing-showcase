@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电商内容生态 · 新人Landing闯关</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif; background: #f0f9ff; color: #1e293b; line-height: 1.6; }
+
+/* 导航 */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; padding: 12px 0; }
+nav .inner { max-width: 1000px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 24px; overflow-x: auto; }
+nav .logo { font-weight: 700; font-size: 16px; color: #0d9488; white-space: nowrap; }
+nav a { color: #64748b; text-decoration: none; font-size: 14px; white-space: nowrap; transition: color 0.2s; }
+nav a:hover { color: #0d9488; }
+
+/* Hero */
+.hero { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%); color: white; padding: 80px 20px; text-align: center; }
+.hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+.hero p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto 32px; }
+.hero .badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero .badge { background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 14px; backdrop-filter: blur(4px); }
+
+/* 通用section */
+section { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+section h2 { font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+section .subtitle { color: #64748b; font-size: 15px; margin-bottom: 32px; }
+
+/* 卡片网格 */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.1); }
+.card .icon { font-size: 32px; margin-bottom: 12px; }
+.card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: #0f172a; }
+.card p { font-size: 14px; color: #64748b; }
+
+/* 阶段 */
+.stage { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+.stage-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.stage-header .stage-icon { font-size: 28px; }
+.stage-header h3 { font-size: 18px; font-weight: 700; }
+.stage-header .stage-time { margin-left: auto; font-size: 13px; color: #64748b; background: #f1f5f9; padding: 4px 12px; border-radius: 12px; }
+.task-group { margin-bottom: 16px; }
+.task-group h4 { font-size: 14px; font-weight: 600; color: #475569; margin-bottom: 8px; }
+.task-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; margin-bottom: 6px; font-size: 14px; }
+.task-item .check { width: 18px; height: 18px; border-radius: 50%; background: #e2e8f0; flex-shrink: 0; }
+.task-item.weekly { opacity: 0.8; }
+.task-item .tag { font-size: 11px; background: #fef3c7; color: #92400e; padding: 2px 6px; border-radius: 4px; margin-left: auto; }
+
+/* 植物 */
+.plant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; }
+.plant-card { background: white; border-radius: 12px; padding: 16px; text-align: center; border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.3s; }
+.plant-card:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.plant-card .plant-emoji { font-size: 40px; margin-bottom: 8px; display: block; }
+.plant-card .plant-name { font-size: 13px; font-weight: 600; color: #0f172a; }
+.plant-card .plant-type { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+/* 数据统计 */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.stat-card { background: white; border-radius: 16px; padding: 28px; text-align: center; border: 1px solid #e2e8f0; }
+.stat-card .number { font-size: 36px; font-weight: 800; color: #0d9488; margin-bottom: 4px; }
+.stat-card .label { font-size: 14px; color: #64748b; }
+
+/* 挑战 */
+.challenge { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 16px; padding: 24px; margin-bottom: 12px; border-left: 4px solid #f59e0b; }
+.challenge h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.challenge p { font-size: 14px; color: #78350f; }
+
+/* 底部 */
+footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 13px; border-top: 1px solid #e2e8f0; margin-top: 40px; }
+
+/* 响应式 */
+@media (max-width: 640px) {
+  .hero h1 { font-size: 30px; }
+  section { padding: 40px 16px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <div class="logo">🌱 Landing闯关</div>
+    <a href="#overview">概览</a>
+    <a href="#tasks">任务系统</a>
+    <a href="#garden">花园系统</a>
+    <a href="#plants">植物图鉴</a>
+    <a href="#features">特色功能</a>
+    <a href="#impact">产品效果</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>电商内容生态 · 新人Landing闯关</h1>
+  <p>把6个月试用期变成一场有温度的成长旅程，游戏化设计让新人融入更自然、更高效、更有陪伴感。</p>
+  <div class="badges">
+    <span class="badge">🎮 游戏化设计</span>
+    <span class="badge">📊 三阶段成长路径</span>
+    <span class="badge">🌱 花园养成</span>
+    <span class="badge">📝 心情日记</span>
+    <span class="badge">🏆 成就系统</span>
+  </div>
+</div>
+
+<section id="overview">
+  <h2>产品概览</h2>
+  <p class="subtitle">为电商内容生态部门量身打造的新人入职成长陪伴应用</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🎯</div>
+      <h3>明确的成长路径</h3>
+      <p>三阶段14个固定任务，从团队融入到独立交付再到蜕变成长，每一步都有清晰指引。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌱</div>
+      <h3>花园养成陪伴</h3>
+      <p>完成任务获得积分，浇水施肥种植物，看着小花园从一片荒地长满鲜花，就像新人的成长。</p>
+    </div>
+    <div class="card">
+      <div class="icon">💭</div>
+      <h3>情绪关怀</h3>
+      <p>心情日记、树洞倾诉、感想记录，让新人的每一次感受都被看见，不只是完成任务的工具。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🤝</div>
+      <h3>协作驱动</h3>
+      <p>任务设计围绕真实协作场景，1v1沟通、轮岗体验、项目参与，加速融入团队。</p>
+    </div>
+  </div>
+</section>
+
+<section id="tasks">
+  <h2>任务系统 · 三阶段成长路径</h2>
+  <p class="subtitle">从融入认知到独立交付再到蜕变成长，6个月清晰可见</p>
+
+  <div class="stage">
+    <div class="stage-header">
+      <span class="stage-icon">🌱</span>
+      <h3>阶段一：融入认知期</h3>
+      <span class="stage-time">第0.5个月（约2周）</span>
+    </div>
+    <div class="task-group">
+      <h4>🤝 团队融入</h4>
+      <div class="task-item"><span class="check"></span>认识协作方，明确分工</div>
+      <div class="task-item"><span class="check"></span>了解团队文化与管理导向</div>
+      <div class="task-item"><span class="check"></span>熟悉业务流程、关键角色及看板</div>
+      <div class="task-item"><span class="check"></span>参与1周业务轮岗体验<span class="tag">校招专属</span></div>
+    </div>
+    <div class="task-group">
+      <h4>🎯 目标对齐</h4>
+      <div class="task-item weekly"><span class="check"></span>每周主动和+1做1v1沟通</div>
+      <div class="task-item"><span class="check"></span>完成试用期目标制定</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-header">
+      <span class="stage-icon">🚀</span>
+      <h3>阶段二：进阶交付期</h3>
+      <span class="stage-time">第0.5-4个月（约14周）</span>
+    </div>
+    <div class="task-group">
+      <h4>💼 独立交付</h4>
+      <div class="task-item"><span class="check"></span>独立参与2-3个业务项目，含至少1个"被认可"项目</div>
+      <div class="task-item"><span class="check"></span>参加商家&达人调研，输出报告</div>
+    </div>
+    <div class="task-group">
+      <h4>💡 业务思考</h4>
+      <div class="task-item weekly"><span class="check"></span>关注行业动态，输出可借鉴点子</div>
+      <div class="task-item"><span class="check"></span>主动发现问题，参与协作方讨论解法</div>
+      <div class="task-item"><span class="check"></span>分享过往经验，为团队带来新思路</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-header">
+      <span class="stage-icon">👑</span>
+      <h3>阶段三：蜕变成长期</h3>
+      <span class="stage-time">第5-6个月（约8周）</span>
+    </div>
+    <div class="task-group">
+      <h4>📈 成长复盘</h4>
+      <div class="task-item"><span class="check"></span>落地3-5个项目，有实际业务产出</div>
+      <div class="task-item"><span class="check"></span>完成转正答辩，与+2沟通新想法</div>
+    </div>
+    <div class="task-group">
+      <h4>📚 经验沉淀</h4>
+      <div class="task-item"><span class="check"></span>对业务/部门管理提出建议</div>
+    </div>
+  </div>
+</section>
+
+<section id="garden">
+  <h2>花园系统 · 成长可视化</h2>
+  <p class="subtitle">每完成一个任务，就为小花园浇一次水；看着植物开花，就是你的成长轨迹</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🗺️</div>
+      <h3>4块土地逐步解锁</h3>
+      <p>完成一个阶段解锁一块新土地，从1块荒地到4片花园，对应你的成长进度。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌱</div>
+      <h3>4个成长阶段</h3>
+      <p>发芽 → 幼苗 → 成长 → 开花，每个阶段需要不同的浇水和施肥次数。</p>
+    </div>
+    <div class="card">
+      <div class="icon">❓</div>
+      <h3>神秘种子机制</h3>
+      <p>第一次种的种子是盲盒，成熟后才知道是什么植物，充满惊喜感。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌤️</div>
+      <h3>天气系统影响</h3>
+      <p>晴天、雨天、阴天、雪天、大风——不同天气影响植物需水量，增加真实感。</p>
+    </div>
+  </div>
+</section>
+
+<section id="plants">
+  <h2>植物图鉴 · 12种专属植物</h2>
+  <p class="subtitle">每种植物都有专属的动画特效，点击详情时绽放</p>
+  <div class="plant-grid">
+    <div class="plant-card"><span class="plant-emoji">🌻</span><div class="plant-name">向日葵</div><div class="plant-type">阳光爆发特效</div></div>
+    <div class="plant-card"><span class="plant-emoji">🌵</span><div class="plant-name">仙人掌</div><div class="plant-type">沙尘暴特效</div></div>
+    <div class="plant-card"><span class="plant-emoji">🪷</span><div class="plant-name">莲花</div><div class="plant-type">水波纹特效</div></div>
+    <div class="plant-card"><span class="plant-emoji">🌹</span><div class="plant-name">玫瑰</div><div class="plant-type">玫瑰花瓣雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🌸</span><div class="plant-name">樱花</div><div class="plant-type">樱花花瓣雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🌺</span><div class="plant-name">桃花</div><div class="plant-type">桃花瓣雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🌷</span><div class="plant-name">郁金香</div><div class="plant-type">紫色花瓣雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🪻</span><div class="plant-name">风信子</div><div class="plant-type">薰衣草雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🪴</span><div class="plant-name">多肉</div><div class="plant-type">绿色花瓣雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🍃</span><div class="plant-name">绿萝</div><div class="plant-type">翠绿叶片雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🌼</span><div class="plant-name">雏菊</div><div class="plant-type">银白花瓣雨</div></div>
+    <div class="plant-card"><span class="plant-emoji">🎄</span><div class="plant-name">圣诞树</div><div class="plant-type">雪花飘落</div></div>
+  </div>
+</section>
+
+<section id="features">
+  <h2>特色功能模块</h2>
+  <p class="subtitle">不只是任务清单，更是有温度的成长陪伴</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">📔</div>
+      <h3>心情日记</h3>
+      <p>10种心情emoji + 6款信纸（3默认+3限定），记录每天的感受，连续打卡得宝箱。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌳</div>
+      <h3>树洞</h3>
+      <p>匿名倾诉你的压力、困惑或开心事，4种互动回应，让情绪有处安放。</p>
+    </div>
+    <div class="card">
+      <div class="icon">⏰</div>
+      <h3>时光胶囊</h3>
+      <p>给未来的自己写一封信，转正那天打开，看看当初的期待和现在的成长。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>成就系统</h3>
+      <p>23个成就徽章，从第一次完成任务到连续打卡30天，每一个小进步都被纪念。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🛒</div>
+      <h3>道具商店</h3>
+      <p>用积分购买肥料、生命之泉、双倍积分卡等道具，游戏化激励完成任务。</p>
+    </div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>阶段报告</h3>
+      <p>7页翻页式成长报告，展示你的任务完成率、心情趋势、植物花园和成就，直观看到成长。</p>
+    </div>
+  </div>
+</section>
+
+<section id="impact">
+  <h2>产品效果</h2>
+  <p class="subtitle">真实数据 · 来自电商内容生态部门试点</p>
+  <div class="stats">
+    <div class="stat-card">
+      <div class="number">80%</div>
+      <div class="label">周活跃率</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">10分钟</div>
+      <div class="label">新人融入耗时</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">90%+</div>
+      <div class="label">新人满意度</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">100%</div>
+      <div class="label">流程覆盖率</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>设计挑战与思考</h2>
+  <p class="subtitle">游戏化不是目的，是让成长更自然的手段</p>
+  <div class="challenge">
+    <h4>🎮 挑战一：怎么让游戏化不显得幼稚？</h4>
+    <p>面向的是互联网职场新人，不是小学生。植物花园和成就系统是"载体"不是"核心"——核心仍然是真实的业务任务和成长路径，游戏化只是降低心理门槛的糖衣。</p>
+  </div>
+  <div class="challenge">
+    <h4>📊 挑战二：怎么让任务设计真的有用，而不是走过场？</h4>
+    <p>每个任务都对应真实的试用期能力要求——从认识人、了解文化，到独立交付、业务思考，再到复盘沉淀。不是为了打卡而打卡，每一步都有明确的成长价值。</p>
+  </div>
+  <div class="challenge">
+    <h4>💭 挑战三：怎么关注情绪，而不只是效率？</h4>
+    <p>新人入职最容易遇到的问题不是"不知道做什么"，而是"不敢问、不好意思说、怕做错"。心情日记和树洞就是给情绪一个出口，让新人知道感受是被重视的。</p>
+  </div>
+</section>
+
+<footer>
+  电商内容生态 · 新人Landing闯关 &nbsp;|&nbsp; 让每一次成长都被看见 🌱
+</footer>
+
+</body>
+</html>
